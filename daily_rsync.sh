@@ -37,12 +37,19 @@ do
    esac
 done
 
+if [ -z "$SOURCE" ] 
+then
+	argumentUsage
+	exit
+fi
+if [ -z "$DESTINATION" ] 
+then
+	argumentUsage
+	exit
+fi
 
-echo $DESTINATION
-echo $SOURCE
+DATE=`date +%Y-%m-%d`
+DESTINATION="${DESTINATION}$DATE"
+mkdir -p $DESTINATION
 
-
-#DESTINATION=/media/drobo/daily/`date + %F`
-#mkdir -p $DESTINATION
-
-#rsync -avh $SOURCE $DESTINATION
+rsync -avh $SOURCE $DESTINATION
